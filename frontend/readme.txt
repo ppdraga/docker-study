@@ -14,3 +14,5 @@ EACCES: permission denied, mkdir '/app/node_modules/.cache'
 docker run --rm -p 3000:3000 --name frontend -v $(pwd)/src:/app/src -v $(pwd)/public:/app/public frontend
 
 
+docker build --file Dockerfile.dev --tag frontend_prod .
+docker run --rm -p 80:80 --name frontend_prod frontend_prod

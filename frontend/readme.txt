@@ -16,3 +16,6 @@ docker run --rm -p 3000:3000 --name frontend -v $(pwd)/src:/app/src -v $(pwd)/pu
 
 docker build --file Dockerfile.dev --tag frontend_prod .
 docker run --rm -p 80:80 --name frontend_prod frontend_prod
+
+for tests in some CI:
+docker run --rm -e CI=true -p 3000:3000 --name frontend -v $(pwd)/src:/app/src -v $(pwd)/public:/app/public frontend npm run test

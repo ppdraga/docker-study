@@ -1,0 +1,58 @@
+version: '3'
+services:
+  postgres:
+    image: postgres
+    # ports:
+    #   - "5433:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: fib_store
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./server/index.js:/app/index.js
+      - ./server/keys.js:/app/keys.js
+    environment:
+      REDIS_HOST: "redis"
+      REDIS_PORT: "6379"
+      PGHOST: "postgres"
+      PGPORT: "5432"
+      PGDATABASE: "fib_store"
+      PGUSER: "postgres"
+      PGPASSWORD: "postgres"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    links:
+      - postgres
+      - redis
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./client/src:/app/src
+      - ./client/public:/app/public
+  worker:
+    build:
+      context: ./worker
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./worker/index.js:/app/index.js
+      - ./worker/keys.js:/app/keys.js
+    environment:
+      REDIS_HOST: "redis"
+      REDIS_PORT: "6379"
+    links:
+      - redis

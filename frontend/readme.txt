@@ -1,5 +1,5 @@
 
-
+npx create-react-app frontend
 
 docker build --file Dockerfile.dev --tag frontend .
 docker run --rm -p 3000:3000 --name frontend frontend

@@ -16,7 +16,19 @@ services:
 
   redis:
     image: redis
-  server:
+
+  nginx:
+    restart: always
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile.dev
+    ports:
+      - "8080:80"
+    depends_on:
+      - api
+      - client
+
+  api:
     build:
       context: ./server
       dockerfile: Dockerfile.dev

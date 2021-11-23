@@ -8,8 +8,7 @@ function App() {
   return (
     <Router>
       <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+      <header>
         <Link to="/">Home</Link>
         <Link to="/otherpage">Other page</Link>
       </header>

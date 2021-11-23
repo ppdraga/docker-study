@@ -41,11 +41,13 @@ app.get('/', (req, res) => {
 });
 
 app.get('/values/all', async (req, res) => {
+    console.log('Got request at values-all');
     const values = await pgClient.query('SELECT * FROM values');
     res.send(values.rows);
 });
 
 app.get('/values/current', async (req, res) => {
+    console.log('Got request at values-current');
     redisClient.hgetall('values', (err, values) => {
         res.send(values);
     });
@@ -53,6 +55,7 @@ app.get('/values/current', async (req, res) => {
 
 app.post('/values', async (req, res) => {
     const index = req.body.index;
+    console.log('Got request at values, index=' + index);
     if (parseInt(index) > 40) {
         res.status(442).send('Index too high!')
     }

@@ -12,11 +12,13 @@ class Fib extends Component {
         this.fetchIndexes();
     }
     async fetchValues() {
+        console.log('fetchValues');
         const values = await axios.get('/api/values/current');
         this.setState({values: values.data});
 
     }
     async fetchIndexes() {
+        console.log('fetchIndexes');
         const seenIndexes = await axios.get('/api/values/all');
         this.setState({seenIndexes: seenIndexes.data});
     }
@@ -25,21 +27,22 @@ class Fib extends Component {
         return this.state.seenIndexes.map( ({ number }) => number).join(' ,');
     }
 
-    renderSubmit = async (event) => {
-        event.preventDefaulte();
+    handleSubmit = async (event) => {
+        event.preventDefault();
         await axios.post('/api/values', {
             index: this.state.index
         });
-        this.setState({index: ''})
+        this.setState({index: ''});
     }
 
     renderValues() {
+        console.log('renderValues');
         const entries = [];
 
-        for (let key in this.values) {
+        for (let key in this.state.values) {
             entries.push(
                 <div key={key}>
-                    For index { key } I calculated value { this.values[key] }
+                    For index { key } I calculated value { this.state.values[key] }
                 </div>
             )
         }

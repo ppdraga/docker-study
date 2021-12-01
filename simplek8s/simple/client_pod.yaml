@@ -7,10 +7,10 @@ metadata:
 spec:
   containers:
     - name: client
-      image: ppdraga/multi-client
+      image: ppdraga/multi-worker
       resources:
         limits:
           memory: "128Mi"
           cpu: "500m"
       ports:
-        - containerPort: 3000
+        - containerPort: 3003

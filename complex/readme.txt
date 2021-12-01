@@ -34,3 +34,11 @@ docker build --file Dockerfile.dev --tag fib_worker .
 
 docker build --tag mynginx .
 docker run --rm --network="host" mynginx
+
+
+build for kube:
+
+worker:
+cd complex/worker
+docker build --tag ppdraga/multi-worker .
+

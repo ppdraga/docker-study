@@ -22,3 +22,19 @@ curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-
 sudo install minikube-linux-amd64 /usr/local/bin/minikube
 minikube start
 minikube status
+
+run pod or something
+kubectl apply -f client_pod.yaml
+
+delete pod or something:
+kubectl delete -f client_pod.yaml
+
+update image in deployment:
+kubectl set image deployment/client-deployment client=ppdraga/multi-client:v5
+
+
+Connect docker-cli to minikube docker-daemon:
+eval $(mimikube docker-env)
+docker ps
+
+

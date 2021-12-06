@@ -42,3 +42,8 @@ worker:
 cd complex/worker
 docker build --tag ppdraga/multi-worker .
 
+server:
+cd complex/worker
+docker build --tag ppdraga/multi-server .
+docker push ppdraga/multi-server
+

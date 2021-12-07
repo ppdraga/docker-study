@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: client-deployment
+  name: redis-deployment
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
-      component: web
+      component: redis
   template:
     metadata:
       labels:
-        component: web
+        component: redis
     spec:
       containers:
-      - name: client
-        image: ppdraga/multi-client
+      - name: redis
+        image: redis
         resources:
           limits:
             memory: "128Mi"
             cpu: "5m"
         ports:
-        - containerPort: 3000
+        - containerPort: 6379

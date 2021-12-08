@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: redis-deployment
+  name: postgres-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      component: redis
+      component: postgres
   template:
     metadata:
       labels:
-        component: redis
+        component: postgres
     spec:
       containers:
-      - name: redis
-        image: redis
+      - name: postgres
+        image: postgres
         resources:
           limits:
             memory: "128Mi"
-            cpu: "15m"
+            cpu: "50m"
         ports:
-        - containerPort: 6379
+        - containerPort: 5432

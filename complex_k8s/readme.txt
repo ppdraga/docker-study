@@ -42,3 +42,7 @@ worker:
 cd complex/worker
 docker build --tag ppdraga/multi-worker .
 
+
+add secret:
+kubectl create secret generic pgpassword --from-literal PGPASSWORD=postgres
+

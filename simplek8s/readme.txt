@@ -38,3 +38,9 @@ eval $(mimikube docker-env)
 docker ps
 
 
+ingress minikube install:
+minikube addons enable ingress
+
+check ingress:
+kubectl get pods --namespace=ingress-nginx
+
